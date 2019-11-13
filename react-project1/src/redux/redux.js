@@ -4,7 +4,7 @@ import {profileReducer} from './../reducers/profile-reducer';
 
 let reducers = combineReducers(
     {
-        profileReducer
+        profilePage: profileReducer
     }
 );
 
