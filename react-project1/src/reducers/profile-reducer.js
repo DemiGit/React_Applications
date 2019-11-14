@@ -7,7 +7,7 @@ let initialState = {
     areaText: ''
 }
 
-export const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => {
     switch(action.type) {
         case CHANGE_AREA_TEXT: {
             return {...state, areaText: action.areaValue }
@@ -22,6 +22,8 @@ export const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export default profileReducer;
 
 export const changeAreaText = (areaValue) => ({type: CHANGE_AREA_TEXT, areaValue  })
 export const addPost = () => ({type: ADD_POST})

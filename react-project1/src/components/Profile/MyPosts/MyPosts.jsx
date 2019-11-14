@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {changeAreaText} from './../../../reducers/profile-reducer';
 import SinglePost from './SinglePost/SinglePost';
 
 const MyPosts = (props) => {
