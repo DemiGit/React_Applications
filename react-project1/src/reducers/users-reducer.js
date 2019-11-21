@@ -1,21 +1,43 @@
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const IS_FETCHING = 'IS_FETCHING';
 
 let initialState = {
     users: [],
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false,
+    totalUsersCount: 20,
+    pageSize: 5,
 }
 
 const usersReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SET_USERS: {
-            return {...state, users: [...action.users]}
+        case SET_USERS: return {...state, users: [...action.users]}
+        case SET_CURRENT_PAGE: return {...state, currentPage: action.onPage}
+        case FOLLOW: {
+            return {
+                ...state, users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {...u, followed: true }
+                    }
+                    return u;
+                })
+            }
         }
-        case SET_CURRENT_PAGE: {
-            return {...state, currentPage: action.onPage}
+        case UNFOLLOW: {
+            return {
+                ...state, users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {...u, followed: false }
+                    }
+                    return u;
+                })
+            }
         }
-        default:
-            return state;
+        case IS_FETCHING: return {...state, isFetching: action.isFetching}
+        default: return state;
     }
 }
 
@@ -23,3 +45,6 @@ export default usersReducer;
 
 export const setUsers = (users) => ({type: SET_USERS, users})
 export const setCurrentPage = (onPage) => ({type: SET_CURRENT_PAGE, onPage})
+export const follow = (userId) => ({type: FOLLOW, userId})
+export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const setisFetching = (isFetching) => ({type: IS_FETCHING, isFetching })
