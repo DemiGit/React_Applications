@@ -1,7 +1,7 @@
 import React from 'react';
-import Prealoder from './../../../common/Loader/Loader';
+import Prealoder from '../../../common/Loader/Loader';
 
-const ProfileUser = (props) => {
+const ProfileInfo = (props) => {
     if(!props.profile) {
         return <Prealoder />
     }
@@ -15,4 +15,4 @@ const ProfileUser = (props) => {
     </div>    
 }
 
-export default ProfileUser;
+export default ProfileInfo;

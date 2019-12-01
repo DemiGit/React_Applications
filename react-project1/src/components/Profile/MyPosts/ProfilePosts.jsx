@@ -1,8 +1,12 @@
 import React from 'react';
 
-import SinglePost from './SinglePost/SinglePost';
+const Post = ({post}) => {
+    return <div>
+        <div>{post}</div>
+    </div>
+}
 
-const MyPosts = (props) => {
+const ProfilePosts = (props) => {
     let areaRef = React.createRef();
 
     let changeAreaValue = () => {
@@ -18,9 +22,9 @@ const MyPosts = (props) => {
         <textarea ref={areaRef} onChange={changeAreaValue} value={props.areaText}></textarea>
         <button onClick={addPost}>Send</button>
         <div>
-            {props.posts.map(p => {return <SinglePost post={p.post}/>})}
+            {props.posts.map(p => {return <Post post={p.post}/>})}
         </div>
     </div>
 }
 
-export default MyPosts;
+export default ProfilePosts;

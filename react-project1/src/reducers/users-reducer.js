@@ -3,6 +3,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const IS_FETCHING = 'IS_FETCHING';
+const IS_FOLLOWING = 'IS_FOLLOWING';
 
 let initialState = {
     users: [],
@@ -10,6 +11,7 @@ let initialState = {
     isFetching: false,
     totalUsersCount: 20,
     pageSize: 5,
+    isFollowing: [],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -37,6 +39,11 @@ const usersReducer = (state = initialState, action) => {
             }
         }
         case IS_FETCHING: return {...state, isFetching: action.isFetching}
+        case IS_FOLLOWING: return {
+            ...state, 
+            isFollowing: action.isFetching ? [state.isFollowing, action.userId] 
+            : [state.isFollowing.filter(id => id !== action.userId)]
+        }
         default: return state;
     }
 }
@@ -48,3 +55,4 @@ export const setCurrentPage = (onPage) => ({type: SET_CURRENT_PAGE, onPage})
 export const follow = (userId) => ({type: FOLLOW, userId})
 export const unfollow = (userId) => ({type: UNFOLLOW, userId})
 export const setisFetching = (isFetching) => ({type: IS_FETCHING, isFetching })
+export const setIsFollowing = (isFetching, userId) => ({type: IS_FOLLOWING, isFetching, userId})
